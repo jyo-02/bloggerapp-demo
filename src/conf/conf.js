@@ -6,6 +6,6 @@ const conf = {
     appWriteBucketId: String(import.meta.env.VITE_BUCKET_ID),
 
 
-}  // We're doing this to ensure that the environment variables are always in string format, to prevent the app from crashing
+}  // We're doing this to ensure that the environment variables are always in string format, to prevent the app from crashing while using int variables
 
 export default conf
