@@ -1,4 +1,4 @@
-import conf from "../conf/conf";
+import conf from "../conf/conf.js";
 import {Client, Account, ID} from "appwrite"
 
 //we're making services such as login, logout, createAccount using methods for each service to prevent vendor-locking
