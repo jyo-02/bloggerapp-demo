@@ -1,6 +1,8 @@
 import conf from "../conf/conf.js";
 import {Client, Account, ID} from "appwrite"
 
+//these are appwrite services for authentication
+
 //we're making services such as login, logout, createAccount using methods for each service to prevent vendor-locking
 
 // we're making a class and creating its object client first, then creating object account (requires the client object for its creation) which is used to create the services

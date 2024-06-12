@@ -1,0 +1,45 @@
+Project Roadmap:
+
+1. first, we define the environment variables and connect the appwrite to our project
+
+2. we create the appwrite services of authentication
+
+3. we create the appwrite services of various in house tasks such as creating posts, how it will be stored, updating etc etc
+
+4.next, we define the store to define two states, logged in and logged out. we define two reducers to update these states inside the store
+
+5. in app.jsx we use useEffect() to get the current user info from appwrite backend as soon as the webapp loads, dispatch it as an object for action payload to reducer login to change the state in store(we keep a check if userdata exists using if-else). Else we dispatch logout to change the state in store to logged out.
+
+6. we define outlet between header and footer in app.jsx, i.e stuff in outlet changes but header and footer remains same for all web pages
+
+7. we use Provider to wrap everything(app.jsx) in the main.jsx 
+
+Starting the component designing:
+
+8. we define a container which acts as the outermost styling element containing everything else
+
+9. we define the footer, its just tailwind classes and Link(used for redirection to urls)
+
+10.we define the header. its divided into 2 parts, logoutbtn which is showed only when logged in and the rest of the header.
+
+logoutbtn:
+i. we create a logout handler method for the button, which uses logout service from the appwrites_auth_service_file and logs us out. we need to simultaneously change the state to loggedout as well so we dispatch the logout reducer to update the state in the store. 
+
+header:
+i. we first check if we're loggedin or not, by accessing the state.auth.status from store using
+useSelector hook(since we're not changing the state and just checking we dont use reducers). the status is then stored in authStatus.
+ii. we next create the navbar in the header using an array, and each button is defined as an object in that array, check with authStatus and display that specific object only if its true
+iii. we define the navbar html inside the container, then loop through the narbar array using map and display it if its status is active, useNavigate hook is used to navigate to the url(specified inside the navbar array) on clicking that button
+iv. next, we change the authstatus and show the logout button if the status is true.
+
+button.jsx
+i. we design a common button which can be used on several occasions, instead of defining button everytime
+ii. we take all the children passed as arguments, define a default bgcolor, textcolor, classname and we spread the props so that we can use one, more or none props passed
+
+about forward ref:
+say we're making a login form, and we define the input field as a seperate component to make the componenet code re-usable. we define the state along with the component but we will be needing access to that state in the form as well, so we pass a reference to it from the component to the form, where its used.
+
+
+Input.jsx(input field component)
+ note: whenever binding an entire function inside a hook, use an arrow function 
+

@@ -1,6 +1,9 @@
 import conf from "../conf/conf";
 import {Client, ID, Databases, Storage, Query} from "appwrite"
 
+//these are appwrite services for after logging in, such as creating, deleting updating getting posts etc
+
+//check auth.js, as the workings are very similar
 
 
 export class Service{
@@ -135,6 +138,6 @@ export class Service{
 
 }
 
-const service = new Service()
+const service = new Service() //creating object of Service class to allow creation of methods
 
 export default service
