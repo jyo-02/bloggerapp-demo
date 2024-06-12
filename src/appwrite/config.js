@@ -20,24 +20,25 @@ export class Service{
     }
     
     //slug refers to the document id here
-    async createPost({title, slug, content, featuredImage, status, userId}){
+    async createPost({ title, slug, content, featuredImage, status, userId }) {
+        console.log({ title, slug, content, featuredImage, status, userId });
         try {
-            return await this.databases.createDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
-                slug,
-                {
-                    title,
-                    content,
-                    featuredImage,
-                    status,
-                    userId,
-                }
-            )
+          return await this.databases.createDocument(
+            conf.appwriteDatabaseId,
+            conf.appwriteCollectionId,
+            slug,
+            {
+              title,
+              content,
+              featuredImage,
+              status,
+              userId,
+            }
+          );
         } catch (error) {
-            console.log("Appwrite service :: createPost :: error", error);
+          console.log(`Appwrite service:: createPost::error`, error);
         }
-    }
+      }
 
     async updatePost(slug, {title, content, featuredImage, status}){
         try {
@@ -60,8 +61,8 @@ export class Service{
     async deletePost(slug){
         try {
             await this.databases.deleteDocument(
-                conf.appWriteDatabaseId,
-                conf.appWriteCollectionId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug
             
             )
