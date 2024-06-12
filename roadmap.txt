@@ -22,24 +22,56 @@ Starting the component designing:
 
 10.we define the header. its divided into 2 parts, logoutbtn which is showed only when logged in and the rest of the header.
 
-logoutbtn:
+LogoutBtn.jsx
+
 i. we create a logout handler method for the button, which uses logout service from the appwrites_auth_service_file and logs us out. we need to simultaneously change the state to loggedout as well so we dispatch the logout reducer to update the state in the store. 
 
-header:
+Header.jsx
+
 i. we first check if we're loggedin or not, by accessing the state.auth.status from store using
 useSelector hook(since we're not changing the state and just checking we dont use reducers). the status is then stored in authStatus.
 ii. we next create the navbar in the header using an array, and each button is defined as an object in that array, check with authStatus and display that specific object only if its true
 iii. we define the navbar html inside the container, then loop through the narbar array using map and display it if its status is active, useNavigate hook is used to navigate to the url(specified inside the navbar array) on clicking that button
 iv. next, we change the authstatus and show the logout button if the status is true.
 
-button.jsx
+Button.jsx
+
 i. we design a common button which can be used on several occasions, instead of defining button everytime
 ii. we take all the children passed as arguments, define a default bgcolor, textcolor, classname and we spread the props so that we can use one, more or none props passed
 
 about forward ref:
 say we're making a login form, and we define the input field as a seperate component to make the componenet code re-usable. we define the state along with the component but we will be needing access to that state in the form as well, so we pass a reference to it from the component to the form, where its used.
 
-
 Input.jsx(input field component)
  note: whenever binding an entire function inside a hook, use an arrow function 
+ we use forward ref to create the input field component
 
+Select.jsx
+we use the forward ref to create the select
+
+PostCard.jsx
+we will query the appwrite dB using the appwrite_servies_we_wrote_in_config.js and directly pass the required arguments 
+we do a preview of the image by passing the featuredimage(id of the image) to the filepreview service we wrote
+
+Login.jsx
+
+we define a login method for the button,
+i. we send the email and password as data to the appwrite using its login service we designed 
+ii. if the credentials work succefully, we get a session and we store it in session
+iii. if there is a session, then we retrieve the userdata using getcurrentuser appwrite service 
+iv. if there is userData retrieved sucessfully, then we navigate to the homepage from the login page, after logging in
+v. then we define the form using ReactHook.
+  handlesubmit is a event handling method, which executes the login method we defined on submitting
+  ps: we dont have to manage the state of the input fields, the register automatically takes the values and sends them using the login method defined.
+vi. next we use the Input.jsx component we designed and pass labels for email part
+  ps: ...register prevents the varous input fields from being overwritten with each other
+  syntax: {...resgister("email", {
+    required: true
+  })}
+vii. we do the same for the password field
+ix. next we use the Button.jsx component we designed
+
+
+Signup.jsx
+
+we sign up using the createaAccount service similarly.
