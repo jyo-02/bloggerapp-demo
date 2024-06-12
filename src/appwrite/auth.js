@@ -12,25 +12,25 @@ import {Client, Account, ID} from "appwrite"
 //frontend just calls the service methods, without knowing its inner defs
  
 export class AuthService {
-    client = new Client()
-    account
+    client = new Client();
+    account;
 
 
     constructor(){
         this.client
-            .setEndpoint(conf.appWriteUrl)
-            .setProject(conf.appWriteProjectId);
+            .setEndpoint(conf.appwriteUrl)
+            .setProject(conf.appwriteProjectId);
         this.account = new Account(this.client) 
     }
 
     async createAccount({email, password, name}){ // the method passes these in an object which we de-structure, async waits for the createAccount op
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name)
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
                 //call another method to directly log in after creating account
                 return this.login({email, password})
             } else {
-                return userAccount
+                return userAccount;
             }
         } catch (error) {
              throw error;
@@ -39,7 +39,7 @@ export class AuthService {
     }
     async login({email, password}){
         try {
-            return await this.account.createEmailSession(email,password)
+            return await this.account.createEmailSession(email, password);
         } catch (error) {
             throw error;
         }
@@ -52,7 +52,7 @@ export class AuthService {
             console.log("Appwrite service :: getCurrentUser :: error", error);
             
         }
-        return null // if it doesn't find any user, can be done in try block using if-else
+        return null; // if it doesn't find any user, can be done in try block using if-else
     }
 
     async logout(){

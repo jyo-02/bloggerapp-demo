@@ -13,21 +13,19 @@ function Login() {
     const [error, setError] = useState("")
 
     const login = async(data) => {
-        setError("") //initially cleaning any previous errors 
-        //we send the data using try catch cus it might not go as well 
+        setError("")
         try {
-            const session = await authService.login(data) //retrieving session using login service
-            if (session) // if there is a session. means the data worked succesfully & we're loggedin
-            {
+            const session = await authService.login(data)
+            if (session) {
                 const userData = await authService.getCurrentUser()
-                // if we can retreive userData we change the state to loggedin in store by dispatching the reducer login
                 if(userData) dispatch(authLogin(userData));
-                navigate("/") // then we navigate to the homepage, being logged in
+                navigate("/")
             }
         } catch (error) {
             setError(error.message)
         }
     }
+
 
   return (
     <div
